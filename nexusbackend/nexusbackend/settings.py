@@ -81,7 +81,7 @@ DATABASES = {
         'USER': 'nexus',        
         'PASSWORD': '12345',  
         'HOST': 'localhost',    
-        'PORT': '',             
+        'PORT': '5432',             
     }
 }
 
