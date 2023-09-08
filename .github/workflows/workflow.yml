@@ -1,7 +1,7 @@
-Django Build and Test CICD
+name: Django Build and Test CICD
 
 on:
-push:
+  push:
     branches:
       - main
       - staging
