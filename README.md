@@ -62,3 +62,21 @@ pip install psycopg2-binary
 ```
 sudo -u postgres psql
 ```
+10. Create the Database ,User and password in the postgres
+11. Grant all priviledges on database to the user created .Use:
+```
+GRANT ALL PRIVILEGES ON DATABASE 'database_name' to 'database_user'
+```
+12. Make migrations using:
+```
+python3 manage.py makemigrations
+```
+13. Migrate using :
+```
+python3 manage.py migrate
+```  
+14. Runserver using:
+ ```
+python3 manage.py runserver
+```
+   
