@@ -1,19 +1,15 @@
-
-name: Django CI/CD
-
-name: Django Build and Test CICD
-
+Django Build and Test CICD
 on:
   push:
     branches:
       - main
-      - staging
       - dev
+      - staging
   pull_request:
     branches:
       - main
+      - dev
       - staging
-      - dev      
 jobs:
   test:
     runs-on: ubuntu-20.04
@@ -24,20 +20,19 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.9'
-      # - name: Install requirements
-      #   run: pip install -r requirements.txt
-      # - name: Check Syntax
-      #   run: pre-commit run --all-files
-      # - name: Make Migrations
-      #   run: 
-      #     python3 manage.py makemigrations
-      # - name: Migration
-      #   run: 
-      #     python3 manage.py migrate
-      # - name: Run server
-      #   run: 
-      #     python3 manage.py runserver
-      # - name: Run Tests
-      #   run: 
-      #     python3 manage.py test
-
+      - name: Install requirements
+        run: pip install -r requirements.txt
+      - name: Check Syntax
+        run: pre-commit run --all-files
+      - name: Make Migrations
+        run: |
+          python3 manage.py makemigrations
+      - name: Migration
+        run: |
+          python3 manage.py migrate
+      - name: Run server
+        run: |
+          python3 manage.py runserver
+      - name: Run Tests
+        run: |
+          python3 manage.py test
