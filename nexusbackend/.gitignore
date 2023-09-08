@@ -3,9 +3,9 @@ myenv/
 db.sqlite3/
 __pycache__/
 
-# myenv
-# db.sqlite3
-# __pycache__
+myenv
+db.sqlite3
+__pycache__
 django.po/
 
 
