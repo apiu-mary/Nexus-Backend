@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'customer',
     'rest_framework',
     'customer_api',
+    'phonenumbers',
+    'phonenumber_field',
+
 ]
 
 MIDDLEWARE = [
