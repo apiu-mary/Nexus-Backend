@@ -9,4 +9,7 @@ class UnitSharing(models.Model):
     updated_at = models.DateTimeField()
 
     def __str__(self):
-        return str(self.shared_units)
+        return f"Shared Units: {self.shared_units}, Created At: {self.created_at}, Updated At: {self.updated_at}"
+
+        
+
