@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'customer_api',
     'drf_yasg2',
     'phonenumber_field',
+    # 'customer_swagger',
 
 ]
 
@@ -90,6 +91,10 @@ DATABASES = {
         'PORT': '5432',             
     }
 }
+
+
+
+
 
 
 # Password validation

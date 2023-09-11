@@ -12,7 +12,7 @@ class Customer(models.Model):
     company_name = models.CharField(max_length=32)
     country = models.CharField(max_length=32)
     city = models.CharField(max_length=64, default=None)
-    phone = PhoneNumberField(null=False, blank=False, unique=True, default="+1234567890")
+    phone_number = PhoneNumberField()
 
     def __str__(self):
         return self.company_name

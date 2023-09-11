@@ -7,10 +7,13 @@ from .serializer import CustomerSerializer
 
 # Create your views here.
 class CustomerListView(APIView):
-    def get(self,request):
-        customers = Customer.objects.all()
-        serializer = CustomerSerializer(customers, many = True)
-        return Response(serializer.data)
+    def get(self, request, id):  # 'id' is captured from the URL path
+        try:
+            customer = Customer.objects.get(id=id)
+            serializer = CustomerSerializer(customer)
+            return Response(serializer.data)
+        except Customer.DoesNotExist:
+            return Response({"error": "Customer not found"}),
     
     def post(self,request):
         serializer = CustomerSerializer(data=request.data)
