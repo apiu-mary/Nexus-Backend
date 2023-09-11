@@ -38,11 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'customer',
-    'rest_framework',
     'customer_api',
-    # 'drf_yasg2',
+    'rest_framework_swagger',
+    'rest_framework',
+    'drf_yasg',
     'phonenumber_field',
-    # 'customer_swagger',
 
 ]
 
