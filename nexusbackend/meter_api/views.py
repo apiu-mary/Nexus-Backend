@@ -34,7 +34,7 @@ class MeterListView(APIView):
         meter.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-    def put(self, request, pk):
+    def update(self, request, pk):
         try:
             meter = Meter.objects.get(pk=pk)
         except Meter.DoesNotExist:

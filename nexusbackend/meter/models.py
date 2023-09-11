@@ -7,7 +7,7 @@ class Meter (models.Model):
     status =  models.CharField(max_length=32)
     
 def __str__(self):
-    return self.status
+    return self.reading
 
 
 
