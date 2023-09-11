@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'customer',
     'rest_framework',
     'customer_api',
-    'drf_yasg2',
+    # 'drf_yasg2',
     'phonenumber_field',
     # 'customer_swagger',
 
