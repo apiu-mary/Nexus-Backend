@@ -1,5 +1,5 @@
 import statistics
-from cairo import STATUS_CLIP_NOT_REPRESENTABLE, STATUS_DEVICE_ERROR, STATUS_DEVICE_FINISHED
+# from cairo import STATUS_CLIP_NOT_REPRESENTABLE, STATUS_DEVICE_ERROR, STATUS_DEVICE_FINISHED
 from django.shortcuts import render
 # from requests import Response
 from rest_framework.views import APIView
