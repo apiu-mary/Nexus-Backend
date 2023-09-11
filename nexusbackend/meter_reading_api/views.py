@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.shortcuts import render
 from meter_reading.models import MeterReading
 from .serializers import MeterReadingSerializer
@@ -7,10 +8,21 @@ from rest_framework import status
 # Create your views here.
 
 class MeterReadingList(APIView):
-    def get(self, request, format=None):
-        meter_readings = MeterReading.objects.all()
-        serializer = MeterReadingSerializer(meter_readings, many=True)
-        return Response(serializer.data)
+    def get_object(self, pk):
+        try:
+            return MeterReading.objects.get(pk=pk)
+        except MeterReading.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk=None, format=None):
+        if pk is not None:
+            meter_reading = self.get_object(pk)
+            serializer = MeterReadingSerializer(meter_reading)
+            return Response(serializer.data)
+        else:
+            meter_readings = MeterReading.objects.all()
+            serializer = MeterReadingSerializer(meter_readings, many=True)
+            return Response(serializer.data)
 
     def post(self, request, format=None):
         serializer = MeterReadingSerializer(data=request.data)
