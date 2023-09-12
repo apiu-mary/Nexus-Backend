@@ -1,20 +1,38 @@
 from django.test import TestCase
-from meter_reading.models import MeterReading
+from django.db.utils import IntegrityError 
+from .models import MeterReading
+from django.utils import timezone
 
-# Create your tests here.
 class MeterReadingTestCase(TestCase):
     def setUp(self):
-        #  tests data for my model
-        self.reading1 = MeterReading.objects.create(current_reading=100.50, date='2023-09-12')
-        self.reading2 = MeterReading.objects.create(current_reading=150.75, date='2023-09-13')
+        self.reading_data = {
+            'current_reading': 100.50,  
+            'date': '2023-09-12',      
+        }
 
-    def test_meter_reading_str_method(self):
-        # Tests the __str__ method of the MeterReading model
-        self.assertEqual(
-            str(self.reading1),
-            "Meter Reading - Date: 2023-09-12, Current Reading: 100.50"
+    def test_create_meter_reading(self):
+        meter_reading = MeterReading.objects.create(**self.reading_data)
+        self.assertEqual(meter_reading.current_reading, self.reading_data['current_reading'])
+        self.assertEqual(str(meter_reading), f"Meter Reading - Date: {self.reading_data['date']}, Current Reading: {self.reading_data['current_reading']}")
+
+    def test_create_meter_reading_without_date(self):
+        reading_data_without_date = self.reading_data.copy()
+        del reading_data_without_date['date']
+        with self.assertRaises(IntegrityError):  
+            MeterReading.objects.create(**reading_data_without_date)
+
+    def test_create_meter_reading_without_current_reading(self):
+        reading_data_without_reading = self.reading_data.copy()
+        del reading_data_without_reading['current_reading']
+        with self.assertRaises(IntegrityError):  
+            MeterReading.objects.create(**reading_data_without_reading)
+
+    def test_create_meter_reading_with_default_date(self):
+        reading_data_with_default_date = {
+            'current_reading': 100.50,
+        }
+        meter_reading = MeterReading.objects.create(
+            **reading_data_with_default_date,
+            date=timezone.now().date()
         )
-        self.assertEqual(
-            str(self.reading2),
-            "Meter Reading - Date: 2023-09-13, Current Reading: 150.75"
-        )
+        self.assertEqual(meter_reading.current_reading, reading_data_with_default_date['current_reading'])
