@@ -1,4 +1,5 @@
 
+
 from django.shortcuts import render
 from rest_framework.views import APIView
 from meter.models import Meter
@@ -24,7 +25,15 @@ class MeterListView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+class MeterDetailsView(APIView):
+    def get(self, request, pk):
+        try:
+            meter = Meter.objects.get(pk=pk)
+        except Meter.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
+        serializer = MeterSerializer(meter)
+        return Response(serializer.data)
     def delete(self, request, pk):
         try:
             meter = Meter.objects.get(pk=pk)
@@ -34,7 +43,7 @@ class MeterListView(APIView):
         meter.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-    def update(self, request, pk):
+    def put(self, request, pk):
         try:
             meter = Meter.objects.get(pk=pk)
         except Meter.DoesNotExist:
