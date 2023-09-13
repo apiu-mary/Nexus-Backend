@@ -1,12 +1,11 @@
 
-
 from django.shortcuts import render
 from rest_framework.views import APIView
 from meter.models import Meter
 from rest_framework.response import Response
 from rest_framework import status
-
 from meter_api.serializers import MeterSerializer
+from rest_framework.exceptions import NotFound, ValidationError
 
 class MeterListView(APIView):
     def get(self, request):
@@ -24,21 +23,24 @@ class MeterListView(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            raise ValidationError("Invalid data provided for meter creation.")
+
 class MeterDetailsView(APIView):
     def get(self, request, pk):
         try:
             meter = Meter.objects.get(pk=pk)
         except Meter.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+            raise NotFound("Meter not found.")
 
         serializer = MeterSerializer(meter)
         return Response(serializer.data)
+
     def delete(self, request, pk):
         try:
             meter = Meter.objects.get(pk=pk)
         except Meter.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+            raise NotFound("Meter not found.")
 
         meter.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
@@ -47,11 +49,13 @@ class MeterDetailsView(APIView):
         try:
             meter = Meter.objects.get(pk=pk)
         except Meter.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+            raise NotFound("Meter not found.")
 
         serializer = MeterSerializer(meter, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            raise ValidationError("Invalid data provided for meter update.")
+
      
