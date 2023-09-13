@@ -19,7 +19,6 @@ class UnitSharingModelTestCase(TestCase):
         self.assertEqual(unit_sharing.shared_units, shared_units)
         self.assertAlmostEqual(unit_sharing.created_at, created_at, delta=timedelta(milliseconds=10))  
         self.assertAlmostEqual(unit_sharing.updated_at, updated_at, delta=timedelta(milliseconds=10))  
-    
 
     def test_model_str_representation(self):
         shared_units = 7.25
