@@ -1,4 +1,11 @@
+
+
+
+
 # name: Django CI/CD
+
+# name: Django Build and Test CICD
+
 
 # on:
 #   push:
@@ -11,12 +18,14 @@
 #       - main
 #       - staging
 #       - dev
+
       
 # jobs:
 #   build:
 #     runs-on: ubuntu-20.04
 #     steps:
 #     - name: Checkout code
+
 #       uses: actions/checkout@v3
 #     - name: Setup Python
 #       uses: actions/setup-python@v3
@@ -39,3 +48,7 @@
 #     - name: Run Tests
 #       run:
 #           python3 manage.py test
+
+#       
+#      
+
