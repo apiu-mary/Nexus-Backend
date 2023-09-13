@@ -38,6 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'unit_sharing',
+    'rest_framework',
+    'sharing_api',
+    
     'customer',
     'customer_api',
     'rest_framework_swagger',
@@ -50,6 +54,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'meter_reading_api', 
       
+
 ]
 
 MIDDLEWARE = [
