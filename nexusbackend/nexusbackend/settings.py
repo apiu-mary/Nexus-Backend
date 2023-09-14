@@ -38,23 +38,19 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+
     'meter',
     'meter_api',
     'rest_framework',
 
 
     'unit_sharing',
-    'rest_framework',
-    'sharing_api',
-    
-    'customer',
-    'customer_api',
-    'rest_framework_swagger',
-    'rest_framework',
-    'drf_yasg',
+    'sharing_api', 
+    'rest_framework.authtoken',
+    # 'rest_framework_swagger',
+    # 'drf_yasg',
     'phonenumber_field',
-
-
+    'user',
     'meter_reading',
     'rest_framework',
     'meter_reading_api', 
@@ -97,20 +93,17 @@ WSGI_APPLICATION = 'nexusbackend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-
+import os
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'niu',          
-        'USER': 'nexus',        
-        'PASSWORD': '12345',  
-        'HOST': 'localhost',    
-        'PORT': '5432',             
+        'ENGINE': os.environ.get('DB_ENGINE'),
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'HOST': os.environ.get('DB_HOST'),
+        'PORT': os.environ.get('DB_PORT'),
     }
 }
-
-
-
 
 
 
