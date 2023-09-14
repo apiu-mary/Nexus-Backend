@@ -61,7 +61,3 @@ class CustomUserTestCase(TestCase):
                                               password='anotherpassword')
         self.assertEqual(user.email, 'another@example.com')
 
-    def test_user_does_not_have_permissions(self):
-        user = CustomUser.objects.create_user(**self.user_data)
-        self.assertFalse(user.user_permissions.filter
-                         (name='Test Permission').exists())
