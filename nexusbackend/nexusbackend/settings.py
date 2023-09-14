@@ -37,19 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     'unit_sharing',
-    'rest_framework',
-    'sharing_api',
-    
-    'customer',
-    'customer_api',
-    'rest_framework_swagger',
-    'rest_framework',
-    'drf_yasg',
+    'sharing_api', 
+    'rest_framework.authtoken',
+    # 'rest_framework_swagger',
+    # 'drf_yasg',
     'phonenumber_field',
-
-
+    'user',
     'meter_reading',
     'rest_framework',
     'meter_reading_api', 
@@ -102,7 +96,6 @@ DATABASES = {
         'PORT': '5432',             
     }
 }
-
 
 
 
