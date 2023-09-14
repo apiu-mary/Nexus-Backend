@@ -37,9 +37,30 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'meter',
     'meter_api',
     'rest_framework',
+
+
+    'unit_sharing',
+    'rest_framework',
+    'sharing_api',
+    
+    'customer',
+    'customer_api',
+    'rest_framework_swagger',
+    'rest_framework',
+    'drf_yasg',
+    'phonenumber_field',
+
+
+    'meter_reading',
+    'rest_framework',
+    'meter_reading_api', 
+      
+
+
 ]
 
 MIDDLEWARE = [
@@ -87,6 +108,10 @@ DATABASES = {
         'PORT': '5432',             
     }
 }
+
+
+
+
 
 
 # Password validation

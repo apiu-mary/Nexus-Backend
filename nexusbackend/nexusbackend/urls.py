@@ -15,11 +15,42 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+
 from django.urls import include, path
+
+
+from django.urls import path
+
+
+from sharing_api import views as sharing_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('sharing_api/', sharing_views.sharing_list),
+    path('sharing_api/<int:id>/', sharing_views.sharing_detail),
+
+from django.urls import path,include
+
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('customer_api/',include ('customer_api.urls')),
+
+from django.urls import path,include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+
    
     path('api/', include('meter_api.urls')),
 ]
+
+
+    path('meter_reading_api/', include('meter_reading_api.urls')),
+
+
+]
+
+
+
 
