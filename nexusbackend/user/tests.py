@@ -1,53 +1,67 @@
-from dataclasses import make_dataclass
 from django.test import TestCase
-from rest_framework.test import APIClient
-from rest_framework import status
-from faker import Faker  # Import the Faker library
+from django.contrib.auth import get_user_model
+from phonenumber_field.phonenumber import PhoneNumber
+from django.contrib.contenttypes.models import ContentType
 from .models import CustomUser
-from .serializers import CustomUserSerializer
 
 
-class UserTestCase(TestCase):
+class CustomUserTestCase(TestCase):
     def setUp(self):
-        self.client = APIClient()
-        self.register_url = '/api/user/register/'  
-        self.login_url = '/api/user/login/'        
-        self.fake = Faker() 
-        
-    def test_user_registration(self):
-        fake_data = {
-            "email": self.fake.email(),
-            "name": self.fake.name(),
-            "city": self.fake.city(),
-            "phonenumber": self.fake.phone_number(),
-            "password": self.fake.password(),
-            "confirm_password": self.fake.password()
-    }
-        
-    response = self.client.post(self.register_url, fake_data, format='json')
-    self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-    self.assertEqual(CustomUser.objects.count(), 1)
-
-
-        # self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        # self.assertEqual(CustomUser.objects.count(), 1)
-
-    def test_user_login(self):
-        user_data = {
-            "email": "user@example.com",
-            "name": "Test User",
-            "city": "Test City",
-            "phonenumber": "+1234567890",
-            "password": "testpassword",
-            "confirm_password": "testpassword"
+        self.user_data = {
+            'username': 'testuser1',
+            'email': 'testuser@example.com',
+            'name': 'Test User',
+            'city': 'Test City',
+            'phonenumber': PhoneNumber.from_string('+1234567890'),
+            'password': 'testpassword',
+            'confirm_password': 'testpassword',
         }
-        CustomUser.objects.create(**user_data)
 
-        user_data = {
-            "email": "user@example.com", 
-            "password": "testpassword"  
-        }
-        response = self.client.post('/login/', data={'email': 'email', 'password': 'password'})
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-     
-  
+    def test_create_custom_user(self):
+        user = CustomUser.objects.create_user(**self.user_data)
+        self.assertIsInstance(user, CustomUser)
+        self.assertEqual(user.username, self.user_data['username'])
+        self.assertEqual(user.email, self.user_data['email'])
+        self.assertEqual(user.name, self.user_data['name'])
+        self.assertEqual(user.city, self.user_data['city'])
+        self.assertEqual(user.phonenumber, self.user_data['phonenumber'])
+
+    def test_create_superuser(self):
+        superuser = CustomUser.objects.create_superuser(**self.user_data)
+        self.assertIsInstance(superuser, CustomUser)
+        self.assertEqual(superuser.username, self.user_data['username'])
+        self.assertEqual(superuser.email, self.user_data['email'])
+        self.assertEqual(superuser.name, self.user_data['name'])
+        self.assertEqual(superuser.city, self.user_data['city'])
+        self.assertEqual(superuser.phonenumber, self.user_data['phonenumber'])
+        self.assertTrue(superuser.is_staff)
+        self.assertTrue(superuser.is_superuser)
+
+    def test_create_user_with_blank_fields(self):
+        with self.assertRaises(ValueError):
+            CustomUser.objects.create_user(username='', email='', name='', 
+                                           city='', phonenumber=None, password='')
+
+ 
+
+    def test_string_representation(self):
+        user = CustomUser.objects.create_user(**self.user_data)
+        self.assertEqual(str(user), self.user_data['username'])
+
+ 
+    def test_create_user_with_different_email(self):
+        CustomUser.objects.create_user(**self.user_data)
+        user = CustomUser.objects.create_user(username='anotheruser', 
+                                              email='another@example.com', 
+                                              name='Another User', 
+                                              city='Another City', 
+                                              phonenumber=PhoneNumber.
+                                              from_string
+                                              ('+9876543210'), 
+                                              password='anotherpassword')
+        self.assertEqual(user.email, 'another@example.com')
+
+    def test_user_does_not_have_permissions(self):
+        user = CustomUser.objects.create_user(**self.user_data)
+        self.assertFalse(user.user_permissions.filter
+                         (name='Test Permission').exists())

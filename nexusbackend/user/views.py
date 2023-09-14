@@ -2,7 +2,6 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
 from django.core.exceptions import ObjectDoesNotExist
-from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
@@ -15,7 +14,7 @@ from django.contrib.auth.decorators import login_required
 class UserListView(APIView):
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserSerializer
-    # permission_classes = [IsAuthenticated]
+   
 
 @api_view(['POST'])
 def user_login_view(request):
