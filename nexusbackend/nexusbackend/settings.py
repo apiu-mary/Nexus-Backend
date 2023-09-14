@@ -38,6 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'meter',
+    'meter_api',
+    'rest_framework',
+
+
     'unit_sharing',
     'rest_framework',
     'sharing_api',
@@ -54,6 +59,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'meter_reading_api', 
       
+
 
 ]
 
@@ -142,7 +148,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
