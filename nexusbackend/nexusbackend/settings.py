@@ -11,6 +11,11 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import environ
+
+env = environ.Env()
+environ.Env.read_env()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,26 +42,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-
     'meter',
     'meter_api',
-    'rest_framework',
-
-
     'unit_sharing',
     'sharing_api', 
     'rest_framework.authtoken',
-    # 'rest_framework_swagger',
-    # 'drf_yasg',
     'phonenumber_field',
     'user',
     'meter_reading',
     'rest_framework',
     'meter_reading_api', 
-      
-
-
+    # 'rest_framework_swagger',
+    # 'drf_yasg',
+    # 'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -96,12 +94,13 @@ WSGI_APPLICATION = 'nexusbackend.wsgi.application'
 import os
 DATABASES = {
     'default': {
-        'ENGINE': os.environ.get('DB_ENGINE'),
-        'NAME': os.environ.get('DB_NAME'),
-        'USER': os.environ.get('DB_USER'),
-        'PASSWORD': os.environ.get('DB_PASSWORD'),
-        'HOST': os.environ.get('DB_HOST'),
-        'PORT': os.environ.get('DB_PORT'),
+        'ENGINE':'django.db.backends.postgresql',
+        'NAME': env('DATABASE_NAME'),
+        'USER': env('DATABASE_USER'),
+        'PASSWORD':env('DATABASE_PASSWORD'),
+        'HOST': env('DATABASE_HOST'),
+        'PORT':env('DATABASE_POST'),
+        'SECRET_KEY':env('SECRET_KEY'),
     }
 }
 
@@ -147,3 +146,4 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
