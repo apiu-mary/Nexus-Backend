@@ -1,16 +1,20 @@
+import uuid
 from django.db import models
-# Create your models here.
-class MeterReading(models.Model):
+
+class Meter(models.Model):
+    meter_serial_number = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     current_reading = models.DecimalField(max_digits=10, decimal_places=2)
-    date = models.DateField(null=True) 
-    # meter = models.ForeignKey('Meter', on_delete=models.CASCADE) this has a relationship with the meter model
+    status = models.CharField(max_length=32)
 
     def __str__(self):
-     return f"Meter Reading - Date: {self.date}, Current Reading: {self.current_reading}"
+        return f"{self.current_reading} A"
+
+class MeterReading(models.Model):
+    current_reading = models.DecimalField(max_digits=10, decimal_places=2)
+    date = models.DateField(null=True)
+    meter = models.ForeignKey(Meter, on_delete=models.CASCADE, related_name='readings',null=True)
+    
 
 
-#class Meter(models.Model):
-   # meter_number = models.IntegerField(unique=True)
-
-   # def __str__(self):
-      #  return f"Meter {self.meter_number}"
+    def __str__(self):
+        return f"Meter Reading - Date: {self.date}, Current Reading: {self.current_reading}"

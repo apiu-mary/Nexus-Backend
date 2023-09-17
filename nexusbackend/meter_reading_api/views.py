@@ -1,9 +1,10 @@
 from django.shortcuts import get_object_or_404, render
 from meter_reading.models import MeterReading
-from .serializers import MeterReadingSerializer
+from .serializers import MeterReadingSerializer,MeterSerializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
+from meter_reading.models import Meter  
 
 class MeterReadingList(APIView):
     def get(self, request, pk=None, format=None):
@@ -19,26 +20,29 @@ class MeterReadingList(APIView):
         except MeterReading.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
-
     def post(self, request, format=None):
         serializer = MeterReadingSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
+            # Here you can associate the meter with the meter reading using meter_serial_number
+            meter_serial_number = request.data.get('meter_serial_number')
+            meter = get_object_or_404(Meter, meter_serial_number=meter_serial_number)
+            serializer.save(meter=meter)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 
     def put(self, request, pk, format=None):
         try:
             meter_reading = MeterReading.objects.get(pk=pk)
             serializer = MeterReadingSerializer(meter_reading, data=request.data)
             if serializer.is_valid():
-                serializer.save()
+                # Here you can also update the meter associated with the meter reading using meter_serial_number
+                meter_serial_number = request.data.get('meter_serial_number')
+                meter = get_object_or_404(Meter, meter_serial_number=meter_serial_number)
+                serializer.save(meter=meter)
                 return Response(serializer.data)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         except MeterReading.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
-
 
     def delete(self, request, pk, format=None):
         try:
@@ -47,3 +51,15 @@ class MeterReadingList(APIView):
             return Response(status=status.HTTP_204_NO_CONTENT)
         except MeterReading.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
+        
+class MeterList(APIView):
+    def get(self, request, format=None):
+        meters = Meter.objects.all()
+        serializer = MeterSerializer(meters, many=True)
+        return Response(serializer.data)
+
+class MeterReadingDetail(APIView):
+    def get(self, request, pk, format=None):
+        meter = get_object_or_404(Meter, pk=pk)
+        serializer = MeterSerializer(meter)
+        return Response(serializer.data)    
