@@ -11,6 +11,11 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import environ
+
+env = environ.Env()
+environ.Env.read_env()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,25 +42,25 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-
     'meter',
     'meter_api',
-    
-
 
     'unit_sharing',
     'sharing_api', 
     'rest_framework.authtoken',
-    # 'rest_framework_swagger',
-    # 'drf_yasg',
     'phonenumber_field',
     'user',
     'meter_reading',
     'rest_framework',
     'meter_reading_api', 
+
+    # 'rest_framework_swagger',
+    # 'drf_yasg',
+    # 'rest_framework',
+
    
       
+
 
 
 ]
@@ -108,11 +113,20 @@ import os
 DATABASES = {
     'default': {
         'ENGINE':'django.db.backends.postgresql',
+
+        'NAME': env('DATABASE_NAME'),
+        'USER': env('DATABASE_USER'),
+        'PASSWORD':env('DATABASE_PASSWORD'),
+        'HOST': env('DATABASE_HOST'),
+        'PORT':env('DATABASE_POST'),
+        'SECRET_KEY':env('SECRET_KEY'),
+
         'NAME': 'niu',
         'USER': 'nexus',
         'PASSWORD':'12345',
         'HOST': 'localhost',
         'PORT':'5432',
+
     }
 }
 
@@ -158,3 +172,4 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
