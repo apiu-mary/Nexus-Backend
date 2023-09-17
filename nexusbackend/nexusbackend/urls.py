@@ -24,7 +24,24 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('sharing_api/', sharing_views.sharing_list),
     path('sharing_api/<int:id>/', sharing_views.sharing_detail),
+
     path('api/', include('meter_api.urls')),
+
+
+]
+
+from django.urls import path,include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+
+   
+    path('api/', include('meter_api.urls')),
+
+
+
+
+
     path('meter_reading_api/', include('meter_reading_api.urls')),
     path('user/', include('user.urls')),
 ]

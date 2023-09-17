@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure-wys&y@m)#@6(!h9!k*(vj!s86t3$wxq0po_+0td=y8q@7^(b_%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'meter',
     'meter_api',
+
     'unit_sharing',
     'sharing_api', 
     'rest_framework.authtoken',
@@ -52,9 +53,16 @@ INSTALLED_APPS = [
     'meter_reading',
     'rest_framework',
     'meter_reading_api', 
+
     # 'rest_framework_swagger',
     # 'drf_yasg',
     # 'rest_framework',
+
+   
+      
+
+
+
 ]
 
 MIDDLEWARE = [
@@ -92,15 +100,33 @@ WSGI_APPLICATION = 'nexusbackend.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 import os
+# DATABASES = {
+#     'default': {
+#         'ENGINE': os.environ.get('DB_ENGINE'),
+#         'NAME': os.environ.get('DB_NAME'),
+#         'USER': os.environ.get('DB_USER'),
+#         'PASSWORD': os.environ.get('DB_PASSWORD'),
+#         'HOST': os.environ.get('DB_HOST'),
+#         'PORT': os.environ.get('DB_PORT'),
+#     }
+# }
 DATABASES = {
     'default': {
         'ENGINE':'django.db.backends.postgresql',
+
         'NAME': env('DATABASE_NAME'),
         'USER': env('DATABASE_USER'),
         'PASSWORD':env('DATABASE_PASSWORD'),
         'HOST': env('DATABASE_HOST'),
         'PORT':env('DATABASE_POST'),
         'SECRET_KEY':env('SECRET_KEY'),
+
+        'NAME': 'niu',
+        'USER': 'nexus',
+        'PASSWORD':'12345',
+        'HOST': 'localhost',
+        'PORT':'5432',
+
     }
 }
 
