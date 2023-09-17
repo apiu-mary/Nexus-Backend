@@ -32,13 +32,7 @@ urlpatterns = [
     path('sharing_api/', sharing_views.sharing_list),
     path('sharing_api/<int:id>/', sharing_views.sharing_detail),
 
-
-from django.urls import path,include
-
-
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('customer_api/',include ('customer_api.urls')),
+]
 
 from django.urls import path,include
 
@@ -47,7 +41,7 @@ urlpatterns = [
 
    
     path('api/', include('meter_api.urls')),
-]
+
 
 
 
