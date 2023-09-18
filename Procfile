@@ -1,1 +1,0 @@
-web: gunicorn nexusbackend.wsgi --log-file -
