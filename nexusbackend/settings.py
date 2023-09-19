@@ -17,6 +17,7 @@ load_dotenv()
 
 
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -44,7 +45,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'meter',
     'meter_api',
-
     'unit_sharing',
     'sharing_api', 
     'rest_framework.authtoken',
@@ -57,12 +57,6 @@ INSTALLED_APPS = [
     # 'rest_framework_swagger',
     # 'drf_yasg',
     # 'rest_framework',
-
-   
-      
-
-
-
 ]
 
 MIDDLEWARE = [
@@ -155,7 +149,7 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 # Heroku settings.
