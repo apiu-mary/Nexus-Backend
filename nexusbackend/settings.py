@@ -53,7 +53,8 @@ INSTALLED_APPS = [
     'user',
     'meter_reading',
     'rest_framework',
-    'meter_reading_api', 
+    'meter_reading_api',
+     
 
     # 'rest_framework_swagger',
     # 'drf_yasg',
