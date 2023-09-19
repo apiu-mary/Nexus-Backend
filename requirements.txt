@@ -52,7 +52,6 @@ pyRFC3339==1.1
 python-dateutil==2.8.1
 pytz==2022.1
 pyxdg==0.27
-reportlab==4.0.5
 requests==2.25.1
 SecretStorage==3.3.1
 six==1.16.0
