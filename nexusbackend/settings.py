@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'meter_reading',
     'rest_framework',
     'meter_reading_api', 
-
+      'django_heroku',
     # 'rest_framework_swagger',
     # 'drf_yasg',
     # 'rest_framework',
