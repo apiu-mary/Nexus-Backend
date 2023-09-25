@@ -87,19 +87,18 @@ WSGI_APPLICATION = 'nexusbackend.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 import os
-# DATABASES = {
-#     'default': {
-#         'ENGINE': os.environ.get('DB_ENGINE'),
-#         'NAME': os.environ.get('DB_NAME'),
-#         'USER': os.environ.get('DB_USER'),
-#         'PASSWORD': os.environ.get('DB_PASSWORD'),
-#         'HOST': os.environ.get('DB_HOST'),
-#         'PORT': os.environ.get('DB_PORT'),
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE':'django.db.backends.postgresql',
+        'NAME': 'niu',
+        'USER': 'nexus',
+        'PASSWORD':'12345',
+        'HOST': 'localhost',
+        'PORT':'5432',
+    }
+}
+
 DATABASES = {'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))}
-
-
 
 
 # Password validation
