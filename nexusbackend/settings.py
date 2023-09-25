@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import dj_database_url
 from pathlib import Path
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -46,7 +47,7 @@ INSTALLED_APPS = [
     'meter_reading',
     'rest_framework',
     'meter_reading_api', 
-
+      'django_heroku',
     # 'rest_framework_swagger',
     # 'drf_yasg',
     # 'rest_framework',
@@ -86,20 +87,7 @@ WSGI_APPLICATION = 'nexusbackend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-import os
-# DATABASES = {
-#     'default': {
-#         'ENGINE': os.environ.get('DB_ENGINE'),
-#         'NAME': os.environ.get('DB_NAME'),
-#         'USER': os.environ.get('DB_USER'),
-#         'PASSWORD': os.environ.get('DB_PASSWORD'),
-#         'HOST': os.environ.get('DB_HOST'),
-#         'PORT': os.environ.get('DB_PORT'),
-#     }
-# }
 DATABASES = {'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))}
-
-
 
 
 # Password validation
