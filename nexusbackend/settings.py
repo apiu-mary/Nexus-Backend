@@ -9,6 +9,8 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
+
+import os
 import dj_database_url
 from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -86,15 +88,14 @@ WSGI_APPLICATION = 'nexusbackend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-import os
 # DATABASES = {
 #     'default': {
-#         'ENGINE': os.environ.get('DB_ENGINE'),
-#         'NAME': os.environ.get('DB_NAME'),
-#         'USER': os.environ.get('DB_USER'),
-#         'PASSWORD': os.environ.get('DB_PASSWORD'),
-#         'HOST': os.environ.get('DB_HOST'),
-#         'PORT': os.environ.get('DB_PORT'),
+#         'ENGINE':'django.db.backends.postgresql',
+#         'NAME': 'niu',
+#         'USER': 'nexus',
+#         'PASSWORD':'12345',
+#         'HOST': 'localhost',
+#         'PORT':'5432',
 #     }
 # }
 DATABASES = {'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))}
@@ -120,7 +121,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
@@ -132,7 +132,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
@@ -143,7 +142,6 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
 
 # Heroku settings.
 import django_heroku

@@ -8,4 +8,5 @@ urlpatterns = [
     path('logout/', user_logout_view, name='user-logout'),
     path('register/', user_registration_view, name='user-registration'),
     path('users/', UserListView.as_view(), name='user-list'),
+    path('users/<int:pk>/', UserListView.as_view(), name='users')
 ]
