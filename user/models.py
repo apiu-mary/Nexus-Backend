@@ -10,7 +10,8 @@ from phonenumber_field.modelfields import PhoneNumberField
 class CustomUser(AbstractUser):
     email = models.EmailField(unique=True)
     name = models.CharField(max_length=100) 
-    city = models.CharField(max_length=32)
+    location = models.CharField(max_length=32)
+    company_name = models.CharField(max_length=50)
     phonenumber = PhoneNumberField(unique=True)
     password = models.CharField(max_length=128)
     confirm_password = models.CharField(max_length=128)
