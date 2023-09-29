@@ -5,10 +5,9 @@ from phonenumber_field.serializerfields import PhoneNumberField
 class CustomUserSerializer(serializers.ModelSerializer):
     confirm_password = serializers.CharField(write_only=True, required=True)
     phonenumber = PhoneNumberField()
-
     class Meta:
         model = CustomUser
-        fields = ['username', 'email', 'phonenumber', 'password', 'confirm_password']
+        fields = ['username', 'email', 'phonenumber', 'password', 'confirm_password','location',' company_name']
         extra_kwargs = {'password': {'write_only': True}, 'confirm_password': {'write_only': True}}
 
     def create(self, validated_data):
