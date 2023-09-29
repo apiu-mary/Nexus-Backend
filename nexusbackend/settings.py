@@ -16,10 +16,8 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-wys&y@m)#@6(!h9!k*(vj!s86t3$wxq0po_+0td=y8q@7^(b_%'
 
@@ -27,7 +25,6 @@ SECRET_KEY = 'django-insecure-wys&y@m)#@6(!h9!k*(vj!s86t3$wxq0po_+0td=y8q@7^(b_%
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-
 
 # Application definition
 
@@ -88,8 +85,8 @@ WSGI_APPLICATION = 'nexusbackend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))}
 
+DATABASES = {'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
